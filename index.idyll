@@ -1,0 +1,67 @@
+[meta title:"My Idyll Post" description:"Short description of assignment 12" /]
+
+[Header
+  fullWidth:true
+  title:"My Idyll - Assignment 12"
+  subtitle:"Exploring new ways to create interactive visualizations."
+  author:"Simran Sura"
+  authorLink:"https://github.com/sssura2"
+  background:"#000000"
+  color:"#ff0000"
+   /]
+
+
+## Introduction
+
+This is an Idyll post for week 12 data visualization assignment. I have included the idyll built- in component as well as made a visualization with cars dataset.
+
+## Interactivity with idyll component
+
+I welcome you to my idyll assignment, when you press the
+ [action onClick:`alert('Welcome to IDYLL')`]click me[/action],
+welcome message appears.
+
+Here I load a dataset about cars and show the first 10 rows in a table:
+
+[data name:"cars" source:"cars.csv"  /]
+
+[Table data:`cars.slice(0, 10)` /]
+
+
+## Added: test vega-lite for visualization
+
+[data name:"cars" source:"cars.csv" /]
+
+
+[IdyllVegaLite data:cars spec:`{
+  width: 300,
+  height: 200,
+  renderer: 'svg',
+  mark: "circle",
+  encoding: {
+    x: {field: "income", type: "quantitative"},
+    y: {field: "sales", type: "quantitative"}
+  }
+}` /]
+
+
+[var name:"colorBy" value:`{}` /]
+
+[IdyllVegaLite data:cars spec:`{
+  width: 300,
+  height: 200,
+  mark: "circle",
+  encoding: {
+    x: {field: "income", type: "quantitative"},
+    y: {field: "sales", type: "quantitative"},
+    color: colorBy
+  }
+}` /]
+
+Color by:
+ [button onClick:`colorBy = {}` ]None[/button]
+ [button onClick:`colorBy = {field: 'gender', type: 'nominal'}` ]Gender[/button]
+
+## Dataset description
+
+The dataset is obtained fron Kaggle. Here, I have taken cars.csv dataset for making visualizations. There are 964 rows and 6 columns. The visualization plots income vs sales. Further, to add the interactivity I have included gender.
